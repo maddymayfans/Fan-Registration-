@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MADDY MAY SUPER FAN REGISTRATION</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 50%;
+            margin: 0 auto;
+        }
+        .hidden {
+            display: none;
+        }
+        .header {
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">MADDY MAY SUPER FAN REGISTRATION</div>
+        
+        <!-- Page 1: Signup -->
+        <div id="page1" class="page">
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name" required><br><br>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" required><br><br>
+                <label for="profilePicture">Profile Picture:</label><br>
+                <input type="file" id="profilePicture" name="profilePicture" accept="image/*"><br><br>
+                <button type="button" onclick="nextPage('page2')">Next</button>
+            </form>
+        </div>
+        
+        <!-- Page 2: Profile -->
+        <div id="page2" class="page hidden">
+            <h2>Your Profile</h2>
+            <p id="profileInfo"></p>
+            <button type="button" onclick="nextPage('page3')">Next</button>
+        </div>
+        
+        <!-- Page 3: Subscription -->
+        <div id="page3" class="page hidden">
+            <h2>Subscription</h2>
+            <p>Subscription cost $100. Do you agree?</p>
+            <button type="button" onclick="nextPage('page4')">Agree</button>
+        </div>
+        
+        <!-- Page 4: Payment Mode -->
+        <div id="page4" class="page hidden">
+            <h2>Mode of Payment</h2>
+            <form id="paymentForm">
+                <label for="paymentMode">Choose a payment mode:</label><br>
+                <select id="paymentMode" name="paymentMode" required>
+                    <option value="cashapp">CashApp</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="venmo">Venmo</option>
+                    <option value="bitcoin">Bitcoin</option>
+                </select><br><br>
+                <button type="button" onclick="nextPage('page5')">Next</button>
+            </form>
+        </div>
+        
+        <!-- Page 5: Thank You -->
+        <div id="page5" class="page hidden">
+            <h2>Thanks for Subscribing</h2>
+            <p>Your registration has been sent to the head office.</p>
+        </div>
+        
+        <div class="footer">
+            <button type="button" onclick="previousPage()">Back</button>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 1;
+
+        function nextPage(pageId) {
+            document.getElementById(`page${currentPage}`).classList.add('hidden');
+            document.getElementById(pageId).classList.remove('hidden');
+            currentPage++;
+
+            if (pageId === 'page2') {
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                document.getElementById('profileInfo').innerText = `Name: ${name}\nEmail: ${email}`;
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                document.getElementById(`page${currentPage}`).classList.add('hidden');
+                currentPage--;
+                document.getElementById(`page${currentPage}`).classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
